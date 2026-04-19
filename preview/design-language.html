@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GLZ — Design Language Preview v0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1A1A1A;
+  --newsprint: #F5F2E8;
+  --paper: #FDFCF9;
+  --warm-gray: #9C9788;
+  --gray-50: #8A8A8A;
+  --gray-30: #B8B8B8;
+  --gray-15: #DCDCDC;
+  --red: #8B2B2B;
+  --blue: #2B4B6F;
+  --serif: 'Charter', 'Source Serif 4', Georgia, serif;
+  --gray-70: #5C5C5C;
+  --mono: 'IBM Plex Mono', Consolas, monospace;
+}
+html, body { margin:0; padding:0; }
+body {
+  background: #C8C5BC;
+  font-family: var(--serif);
+  color: var(--ink);
+  padding: 40px 20px 80px;
+}
+.preview-header {
+  max-width: 8.5in;
+  margin: 0 auto 30px;
+  padding: 16px 20px;
+  background: var(--ink);
+  color: var(--newsprint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.preview-header h1 {
+  margin: 0 0 6px 0;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.preview-header p {
+  margin: 0;
+  font-size: 10px;
+  color: #D5D2C8;
+  line-height: 1.5;
+}
+
+/* Plate container — mimics a printed page */
+.plate {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto 60px;
+  background: var(--newsprint);
+  padding: 1in;
+  box-sizing: border-box;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  position: relative;
+  color: var(--ink);
+}
+.plate-tag {
+  position: absolute;
+  top: -26px;
+  left: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #555;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.plate-tag .register {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 6px;
+  background: #333;
+  color: #F5F2E8;
+  letter-spacing: 0.06em;
+}
+.plate-tag .register.pds { background: var(--blue); }
+.plate-tag .register.arpanet { background: var(--ink); }
+.plate-tag .register.seam {
+  background: linear-gradient(90deg, var(--blue) 50%, var(--ink) 50%);
+}
+
+/* === PDS Register === */
+.pds-page {}
+.pds-page .running-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10px;
+  color: var(--gray-70);
+  border-bottom: 0.5px solid var(--gray-50);
+  padding-bottom: 6px;
+  margin-bottom: 30px;
+}
+.pds-page h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0 0 18px 0;
+  letter-spacing: 0.005em;
+}
+.pds-page h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 24px 0 12px 0;
+}
+.pds-page p {
+  font-family: var(--serif);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+  text-align: justify;
+  hyphens: auto;
+}
+.pds-page p + p { text-indent: 1em; }
+.pds-page .lead {
+  font-size: 13px;
+  font-style: italic;
+  margin-bottom: 18px;
+  text-align: left;
+}
+.pds-page .source-line {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10px;
+  color: var(--gray-70);
+  margin-top: 8px;
+}
+.pds-page .folio {
+  position: absolute;
+  bottom: 0.6in;
+  left: 1in;
+  right: 1in;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10px;
+  color: var(--gray-70);
+  border-top: 0.5px solid var(--gray-50);
+  padding-top: 6px;
+}
+.flag {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* === Cover page (PDS) === */
+.cover-plate {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.cover-plate .org {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  margin-top: 1.5in;
+}
+.cover-plate .org-rule {
+  width: 180px;
+  height: 2px;
+  background: var(--ink);
+  margin: 6px auto 0;
+}
+.cover-plate .cover-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin: 1.8in 0 0 0;
+  padding: 0 40px;
+}
+.cover-plate .cover-subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 18px 0 0 0;
+}
+.cover-plate .em-rule {
+  font-family: var(--serif);
+  letter-spacing: -0.1em;
+  margin: 50px 0 18px;
+  font-size: 18px;
+  color: var(--ink);
+}
+.cover-plate .stamp-block {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  margin-top: auto;
+  margin-bottom: 0.4in;
+}
+.cover-plate .stamp-block .stamp-head {
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+
+/* === ARPANET Register === */
+.arpanet-page {
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.arpanet-page .arpanet-running-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  margin-bottom: 30px;
+}
+.arpanet-page .arpanet-running-head .left,
+.arpanet-page .arpanet-running-head .right {
+  font-family: var(--mono);
+}
+.arpanet-page .arpanet-running-head .chapter {
+  display: block;
+  font-size: 10px;
+}
+.arpanet-page h1.arpanet-h1 {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 20px 0 18px 0;
+}
+.arpanet-page h2.arpanet-h2 {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 11px;
+  margin: 20px 0 12px 0;
+}
+.arpanet-page .arpanet-body p {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0 0 1em 0;
+  text-indent: 0;
+}
+.arpanet-page ul.arpanet-list {
+  list-style: none;
+  margin: 0 0 1em 0;
+  padding: 0 0 0 2ch;
+}
+.arpanet-page ul.arpanet-list li {
+  padding-left: 2ch;
+  text-indent: -2ch;
+  margin-bottom: 0.4em;
+}
+.arpanet-page ul.arpanet-list li::before {
+  content: "o  ";
+  white-space: pre;
+}
+.arpanet-page .arpanet-folio {
+  position: absolute;
+  bottom: 0.5in;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.arpanet-page .caveat {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-top: 10px;
+}
+
+/* === Embedded ARPANET figure inside PDS page === */
+.embed-figure {
+  background: var(--paper);
+  border: 0.5px solid var(--ink);
+  padding: 20px 22px 14px;
+  margin: 24px 0 8px;
+  font-family: var(--mono);
+}
+.embed-figure .figure-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: 0.03em;
+}
+.embed-figure pre {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+.embed-caption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10px;
+  color: var(--gray-70);
+  text-align: left;
+  margin: 6px 0 0 0;
+}
+
+/* === Heavyarms logical map (ARPANET) === */
+.map-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: 0 0 18px 0;
+}
+.map-title .rule {
+  display: inline-block;
+  width: 60%;
+  border-top: 0.5px solid var(--ink);
+  margin-top: 3px;
+}
+svg.logical-map, svg.geo-map, svg.line-chart {
+  width: 100%;
+  display: block;
+  background: var(--paper);
+}
+.map-legend {
+  font-family: var(--mono);
+  font-size: 10px;
+  margin-top: 14px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.map-legend .item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.map-legend .glyph {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  font-family: var(--mono);
+}
+
+/* === Monospace readiness matrix === */
+.matrix-block {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  white-space: pre;
+  background: var(--paper);
+  border: 0.5px solid var(--ink);
+  padding: 18px 24px;
+  overflow-x: auto;
+}
+.matrix-caption {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-align: center;
+  margin: 14px 0 6px;
+}
+.matrix-legend {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.7;
+  margin-top: 14px;
+}
+.matrix-legend .col-label {
+  display: inline-block;
+  width: 12ch;
+}
+
+/* === Two-column for geographic plate === */
+.geo-plate {
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Plate labels and notes === */
+.nota-bene {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10px;
+  color: var(--gray-70);
+  margin-top: 24px;
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-header">
+  <h1>MechaPDS — Design Language Preview v0.2</h1>
+  <p>Six plates demonstrating MechaPDS v0.2, the integrated PDS × ARPANET design language for Gundam Level Zero. Revised 2026-04-18 after Phase 1 Inquisitor review. Placeholder content only — typographic and figure conventions are the subject of review. Font stack: Charter → Source Serif 4 → Georgia (Charter renders if installed; otherwise Source Serif 4 serves as documented fallback).</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLATE 1 — COVER (PDS register) -->
+<!-- ============================================================ -->
+<div class="plate pds-page cover-plate">
+  <span class="plate-tag">Plate 1 · Cover / Landing <span class="register pds">PDS</span></span>
+
+  <div>
+    <div class="org">EMMET PENNEY</div>
+    <div class="org-rule"></div>
+  </div>
+
+  <div>
+    <div class="cover-title">GUNDAM LEVEL ZERO</div>
+    <div class="cover-subtitle">Industrial Prerequisites for a Heavyarms-Class Platform</div>
+    <div class="em-rule">— — — — — —</div>
+    <div style="font-family:var(--serif); font-size:13px; letter-spacing:0.08em; text-transform:uppercase;">A Policy &amp; Feasibility Study</div>
+  </div>
+
+  <div class="stamp-block">
+    <div class="stamp-head">— — — — — — — — — —</div>
+    GLZ REPORT No. 2026-04<br>
+    APRIL 2026<br>
+    <span style="color: var(--warm-gray);">(PRELIMINARY — PHASE 1 AESTHETIC)</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLATE 2 — Narrative with embedded ARPANET figure (SEAM) -->
+<!-- ============================================================ -->
+<div class="plate pds-page">
+  <span class="plate-tag">Plate 2 · Narrative with Embedded ARPANET Figure <span class="register seam">PDS + ARPANET</span></span>
+
+  <div class="running-head">
+    <span><em>Gundam Level Zero</em></span>
+    <span>Chapter I &mdash; The Case</span>
+  </div>
+
+  <h1>1. The Argument, in Brief</h1>
+
+  <p class="lead">Building a Heavyarms-class Gundam is not a speculative proposal. It is an industrial one. What follows is a sketch of the threshold — a configuration of supply chain, materials science, and doctrinal posture — at which the production of bipedal, pilot-operated combat frames moves from fiction into acquisition-program territory.</p>
+
+  <p>The argument rests on two observations. First, every individual subsystem required by the Heavyarms Custom design brief has, in some form, been demonstrated at scale — usually for an adjacent defense application, occasionally for civilian infrastructure. Second, the integration problem is real but bounded. The United States industrial base is not structurally incapable of producing a 16-meter bipedal weapon platform; it is structurally inattentive to the possibility.</p>
+
+  <p>The central question of this study is therefore not <em>whether</em> a Gundam can be built, but <em>what would have to change</em> for one to be built on an acquisition timeline comparable to the DDG(X) destroyer program, the Sentinel ICBM program, or the NGAD fighter. The answer, summarized in the matrix below, is neither encouraging nor discouraging. It is specific.</p>
+
+  <div class="embed-figure">
+    <div class="figure-title">GATING-TECHNOLOGY READINESS — GLZ INDEX (2026)</div>
+<pre>   1  |  2   |  3  |  4   |  5                          |  6                          |  7
+------|------|-----|------|------------------------------|------------------------------|---------
+ T1   | PROP | 4   |  8   | Hydraulic actuator density   | Power-to-weight, 20-40 tons  |  ESTIMATE
+ T2   | STRU | 5   |  7   | Frame metallurgy             | Composite armor at scale     |  STRONG
+ T3   | MOBI | 3   |  9   | Legged gait &gt; 20 tons        | Fall recovery, urban terrain |  PARTIAL
+ T4   | SENS | 6   |  7   | MMW &amp; LWIR fusion            | EW resilience                |  STRONG
+ T5   | ARMT | 7   |  6   | Loadout integration          | Beam-analogue substitution   |  STRONG
+ T6   | INDB | 2   | 10   | Specialty alloys, tier-2 cap | Heavy-fab throughput         |  ----
+ T7   | DOCT | ---- | ---- | Cost-per-kill vs. UGV swarm   | Urban / island-chain utility |  GAP
+</pre>
+    <div style="font-family:var(--mono); font-size:9.5px; margin-top:10px; letter-spacing:0.02em;">
+      COL 1: TRACK &nbsp;&nbsp; COL 2: SUBSYSTEM &nbsp;&nbsp; COL 3: CURRENT TRL (1-9) &nbsp;&nbsp; COL 4: GAP SIZE (1-10) &nbsp;&nbsp; COL 5: PRIMARY GATING ITEM &nbsp;&nbsp; COL 6: SECONDARY GATING ITEM &nbsp;&nbsp; COL 7: EVIDENCE CLASS<br>
+      (PLEASE NOTE THAT WHILE THIS TABLE SHOWS THE READINESS POPULATION ACCORDING TO THE BEST INFORMATION OBTAINABLE, NO CLAIM CAN BE MADE FOR ITS ACCURACY. PLACEHOLDER VALUES FOR AESTHETIC PREVIEW.)
+    </div>
+  </div>
+  <p class="embed-caption">Figure&nbsp;1 &mdash; Placeholder Gundam Level Zero readiness index, seven research tracks. Values will be populated through Phase 2 research (Ultan-vetted sources; see Source Card Index).</p>
+
+  <h2>1.1 Why the Threshold Matters</h2>
+
+  <p>The <span class="flag">[GAP]</span> on T7 — Doctrinal &amp; Tactical Utility — is not a failure of the research. It is a claim about the field. <span class="flag">[DATED: 2024-11]</span> open-source doctrine treats bipedal combat systems as a curiosity; the authoritative treatment of their role in great-power competition has not yet been written. DARC&#39;s ongoing work on the changing character of combat provides the closest current frame, and Phase 2 of this study engages it directly.</p>
+
+  <p>What does it mean for a technology to be &ldquo;at Gundam Level Zero&rdquo;? The answer is deliberately specific: it means that <em>no gating item remains at TRL 3 or below</em>, that the tier-2 industrial base for each subsystem carries at least two qualified suppliers, and that the doctrinal case has been argued in at least one peer-reviewed venue. By that standard the United States is not at Level Zero today. It is, however, closer than a reader of the trade press would guess.</p>
+
+  <div class="folio">
+    <span>Gundam Level Zero</span>
+    <span>I–3</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLATE 3 — Heavyarms subsystem logical map (ARPANET) -->
+<!-- ============================================================ -->
+<div class="plate arpanet-page">
+  <span class="plate-tag">Plate 3 · Heavyarms Subsystem Logical Map <span class="register arpanet">ARPANET</span></span>
+
+  <div class="arpanet-running-head">
+    <div class="left">GUNDAM LEVEL ZERO<br><span class="chapter">Chapter II</span></div>
+    <div class="right" style="text-align:right;">The Spec<br><span class="chapter">Logical Map</span></div>
+  </div>
+
+  <div class="map-title">
+    HEAVYARMS CUSTOM &mdash; LOGICAL MAP, PRIMARY SUBSYSTEMS<br>
+    <span class="rule"></span>
+  </div>
+
+  <svg class="logical-map" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logical-map-title" aria-describedby="logical-map-desc">
+    <title id="logical-map-title">Heavyarms Custom primary subsystems logical map</title>
+    <desc id="logical-map-desc">Schematic diagram of the six primary subsystems of a Heavyarms-class platform (Propulsion, Structure, Power, Sensors, Command and Control, Armament) shown as boxed nodes with orthogonal data-bus connections, component ellipses, and a zigzag pilot-signal link between Propulsion and Command and Control. Placeholder content; dimensions are not proportional.</desc>
+    <style>
+      .imp-box { fill: none; stroke: #1A1A1A; stroke-width: 1.5; }
+      .imp-label { font-family: 'IBM Plex Mono', monospace; font-size: 14px; fill: #1A1A1A; }
+      .site-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: #1A1A1A; font-style: italic; }
+      .host-ellipse { fill: #FDFCF9; stroke: #1A1A1A; stroke-width: 1; }
+      .host-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+      .link { stroke: #1A1A1A; stroke-width: 1.3; fill: none; }
+      .link-dash { stroke: #1A1A1A; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+    </style>
+
+    <!-- Main interconnecting links (orthogonal) -->
+    <!-- Top row: PROP - STRU - POWR -->
+    <line class="link" x1="250" y1="130" x2="480" y2="130"/>
+    <line class="link" x1="620" y1="130" x2="850" y2="130"/>
+    <!-- Bottom row: SENS - C2 - ARMT -->
+    <line class="link" x1="250" y1="490" x2="480" y2="490"/>
+    <line class="link" x1="620" y1="490" x2="850" y2="490"/>
+    <!-- Vertical links -->
+    <line class="link" x1="175" y1="160" x2="175" y2="460"/>
+    <line class="link" x1="550" y1="160" x2="550" y2="460"/>
+    <line class="link" x1="925" y1="160" x2="925" y2="460"/>
+    <!-- Diagonal PROP-C2 (pilot signal to primary actuator) via zigzag -->
+    <path class="link" d="M 200 160 L 200 280 L 500 280 L 500 460" stroke-dasharray="2 0" />
+
+    <!-- PROPULSION box -->
+    <g>
+      <text class="site-label" x="175" y="85" text-anchor="middle">Propulsion</text>
+      <rect class="imp-box" x="100" y="100" width="150" height="60"/>
+      <text class="imp-label" x="175" y="135" text-anchor="middle">PROP</text>
+      <!-- Hosts -->
+      <ellipse class="host-ellipse" cx="50" cy="75" rx="45" ry="18"/>
+      <text class="host-label" x="50" y="79" text-anchor="middle">M-256 LEG</text>
+      <line class="link" x1="95" y1="80" x2="110" y2="100"/>
+      <ellipse class="host-ellipse" cx="50" cy="180" rx="45" ry="18"/>
+      <text class="host-label" x="50" y="184" text-anchor="middle">AMBI-BAL</text>
+      <line class="link" x1="95" y1="175" x2="110" y2="155"/>
+      <ellipse class="host-ellipse" cx="200" cy="210" rx="48" ry="18"/>
+      <text class="host-label" x="200" y="214" text-anchor="middle">HYD-STAB</text>
+      <line class="link" x1="200" y1="160" x2="200" y2="192"/>
+    </g>
+
+    <!-- STRUCTURE box -->
+    <g>
+      <text class="site-label" x="550" y="85" text-anchor="middle">Structure</text>
+      <rect class="imp-box" x="480" y="100" width="140" height="60"/>
+      <text class="imp-label" x="550" y="135" text-anchor="middle">STRU</text>
+      <ellipse class="host-ellipse" cx="430" cy="75" rx="45" ry="18"/>
+      <text class="host-label" x="430" y="79" text-anchor="middle">GEN-1 FRAME</text>
+      <line class="link" x1="475" y1="80" x2="490" y2="100"/>
+      <ellipse class="host-ellipse" cx="670" cy="75" rx="42" ry="18"/>
+      <text class="host-label" x="670" y="79" text-anchor="middle">ARM-PLATE</text>
+      <line class="link" x1="628" y1="80" x2="615" y2="100"/>
+      <ellipse class="host-ellipse" cx="550" cy="210" rx="52" ry="18"/>
+      <text class="host-label" x="550" y="214" text-anchor="middle">COMPOSITE-IX</text>
+      <line class="link" x1="550" y1="160" x2="550" y2="192"/>
+    </g>
+
+    <!-- POWER box -->
+    <g>
+      <text class="site-label" x="925" y="85" text-anchor="middle">Power</text>
+      <rect class="imp-box" x="850" y="100" width="150" height="60"/>
+      <text class="imp-label" x="925" y="135" text-anchor="middle">POWR</text>
+      <ellipse class="host-ellipse" cx="1050" cy="75" rx="48" ry="18"/>
+      <text class="host-label" x="1050" y="79" text-anchor="middle">REACTOR-A</text>
+      <line class="link" x1="1002" y1="80" x2="990" y2="100"/>
+      <ellipse class="host-ellipse" cx="1050" cy="180" rx="45" ry="18"/>
+      <text class="host-label" x="1050" y="184" text-anchor="middle">CAP-BANK</text>
+      <line class="link" x1="1005" y1="175" x2="990" y2="155"/>
+      <ellipse class="host-ellipse" cx="925" cy="210" rx="50" ry="18"/>
+      <text class="host-label" x="925" y="214" text-anchor="middle">BATTERY-AUX</text>
+      <line class="link" x1="925" y1="160" x2="925" y2="192"/>
+    </g>
+
+    <!-- SENSOR box -->
+    <g>
+      <text class="site-label" x="175" y="445" text-anchor="middle">Sensor</text>
+      <rect class="imp-box" x="100" y="460" width="150" height="60"/>
+      <text class="imp-label" x="175" y="495" text-anchor="middle">SENS</text>
+      <ellipse class="host-ellipse" cx="50" cy="435" rx="45" ry="18"/>
+      <text class="host-label" x="50" y="439" text-anchor="middle">MMW-RADAR</text>
+      <line class="link" x1="95" y1="440" x2="110" y2="460"/>
+      <ellipse class="host-ellipse" cx="50" cy="545" rx="42" ry="18"/>
+      <text class="host-label" x="50" y="549" text-anchor="middle">LIDAR-360</text>
+      <line class="link" x1="92" y1="540" x2="110" y2="515"/>
+      <ellipse class="host-ellipse" cx="200" cy="570" rx="48" ry="18"/>
+      <text class="host-label" x="200" y="574" text-anchor="middle">PASSIVE-IR</text>
+      <line class="link" x1="200" y1="520" x2="200" y2="552"/>
+    </g>
+
+    <!-- C2 box (Command and Control) -->
+    <g>
+      <text class="site-label" x="550" y="445" text-anchor="middle">C2</text>
+      <rect class="imp-box" x="480" y="460" width="140" height="60"/>
+      <text class="imp-label" x="550" y="495" text-anchor="middle">C2</text>
+      <ellipse class="host-ellipse" cx="430" cy="435" rx="40" ry="18"/>
+      <text class="host-label" x="430" y="439" text-anchor="middle">COCKPIT</text>
+      <line class="link" x1="470" y1="440" x2="490" y2="460"/>
+      <ellipse class="host-ellipse" cx="670" cy="435" rx="42" ry="18"/>
+      <text class="host-label" x="670" y="439" text-anchor="middle">PILOT-I/F</text>
+      <line class="link" x1="628" y1="440" x2="615" y2="460"/>
+      <ellipse class="host-ellipse" cx="550" cy="570" rx="48" ry="18"/>
+      <text class="host-label" x="550" y="574" text-anchor="middle">AI-ASSIST</text>
+      <line class="link" x1="550" y1="520" x2="550" y2="552"/>
+    </g>
+
+    <!-- ARMAMENT box -->
+    <g>
+      <text class="site-label" x="925" y="445" text-anchor="middle">Armament</text>
+      <rect class="imp-box" x="850" y="460" width="150" height="60"/>
+      <text class="imp-label" x="925" y="495" text-anchor="middle">ARMT</text>
+      <ellipse class="host-ellipse" cx="1055" cy="435" rx="48" ry="18"/>
+      <text class="host-label" x="1055" y="439" text-anchor="middle">GATLING-L</text>
+      <line class="link" x1="1007" y1="440" x2="995" y2="460"/>
+      <ellipse class="host-ellipse" cx="1055" cy="495" rx="48" ry="18"/>
+      <text class="host-label" x="1055" y="499" text-anchor="middle">GATLING-R</text>
+      <line class="link" x1="1007" y1="495" x2="1000" y2="490"/>
+      <ellipse class="host-ellipse" cx="1055" cy="555" rx="48" ry="18"/>
+      <text class="host-label" x="1055" y="559" text-anchor="middle">MISSILE-POD</text>
+      <line class="link" x1="1007" y1="550" x2="995" y2="520"/>
+      <ellipse class="host-ellipse" cx="925" cy="570" rx="42" ry="18"/>
+      <text class="host-label" x="925" y="574" text-anchor="middle">BLADE-X</text>
+      <line class="link" x1="925" y1="520" x2="925" y2="552"/>
+    </g>
+
+    <!-- Satellite-style zigzag on one link to demonstrate convention -->
+    <path class="link" d="M 250 490 L 290 490 L 295 485 L 305 495 L 315 485 L 325 495 L 335 485 L 345 495 L 355 485 L 365 495 L 375 485 L 385 495 L 395 485 L 405 495 L 415 485 L 425 495 L 435 485 L 445 495 L 450 490 L 480 490" />
+
+  </svg>
+
+  <div class="map-legend">
+    <span class="item"><span class="glyph">▭</span>Subsystem (domain-labeled)</span>
+    <span class="item"><span class="glyph">◯</span>Component</span>
+    <span class="item"><span class="glyph">&mdash;</span>Data Bus</span>
+    <span class="item"><span class="glyph">⌇⌇</span>Pilot Signal (High-Latency Link)</span>
+  </div>
+
+  <div class="caveat">
+    Figure II-1 -- HEAVYARMS CUSTOM, PRIMARY SUBSYSTEMS LOGICAL MAP<br>
+    (SCHEMATIC. DISTANCES AND RELATIVE POSITIONS ARE NOT PROPORTIONAL.)<br>
+    (PLEASE NOTE THAT WHILE THIS MAP SHOWS THE SUBSYSTEM POPULATION ACCORDING TO THE BEST INFORMATION OBTAINABLE, NO CLAIM CAN BE MADE FOR ITS ACCURACY. PLACEHOLDER VALUES FOR AESTHETIC PREVIEW.)<br>
+    (NAMES SHOWN ARE SUBSYSTEM NAMES, NOT (NECESSARILY) COMPONENT MANUFACTURERS.)<br>
+    (SOURCE: PLACEHOLDER -- TO BE FILLED FROM PHASE 2 RESEARCH.)<br>
+    &lt;!-- [HONESTY-CHECK] Depicted dimension: inter-subsystem data-bus adjacency at the frame level. The six subsystems are NOT flat under functional-dependency analysis; this map is illustrative of Plate 3's explicit hierarchy-treatment carve-out pending v0.3 redraw with nested grammar. --&gt;
+  </div>
+
+  <div class="arpanet-folio">II–4</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLATE 4 — Readiness matrix + traffic-style chart (ARPANET) -->
+<!-- ============================================================ -->
+<div class="plate arpanet-page">
+  <span class="plate-tag">Plate 4 · GLZ Readiness Matrix + Growth Chart <span class="register arpanet">ARPANET</span></span>
+
+  <div class="arpanet-running-head">
+    <div class="left">GUNDAM LEVEL ZERO<br><span class="chapter">Chapter III</span></div>
+    <div class="right" style="text-align:right;">Gundam Level Zero<br><span class="chapter">Quantitative Assessment</span></div>
+  </div>
+
+  <h1 class="arpanet-h1">3.2 Quantitative Indicators</h1>
+
+  <p class="arpanet-body">Having shown the subsystem architecture in the previous chapter, it is interesting to consider the gating-item readiness on a more quantitative basis. We use the seven research tracks defined in Section 1.2 as the basis for the data shown in the Figure 16 matrix below.</p>
+
+  <div class="matrix-caption">
+    GATING-TECHNOLOGY READINESS MATRIX &mdash; PHASE 2 DRAFT
+  </div>
+
+  <div class="matrix-block">   1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |  9      |  10     |  11
+-------|-----|------|------|------|------|------|------|---------|---------|---------
+T1 PROP|  3  | 4.0  | 8.0  |  3   | ---  | ---  | 2.50%|  12,400 |   2,100 |  14,500
+T2 STRU|  4  | 4.5  | 7.0  |  4   | ---  | ---  | 1.80%|   8,900 |   1,500 |  10,400
+T3 MOBI|  2  | 3.0  | 9.0  |  2   | ---  | ---  | 4.20%|   3,200 |     620 |   3,820
+T4 SENS|  5  | 5.5  | 7.0  |  5   | 5.2  |  6   | 1.10%|  19,800 |   3,400 |  23,200
+T5 ARMT|  6  | 6.2  | 6.5  |  6   | 6.0  |  6   | 0.80%|  34,100 |   5,900 |  40,000
+T6 INDB|  1  | 2.0  |10.0  |  1   | ---  | ---  | ---  |     ---     |     ---     |    ----
+T7 DOCT| --- |(GAP) |(GAP) | ---  | ---  | ---  | ---  |     ---     |     ---     |    ----
+</div>
+
+  <div class="matrix-legend">
+<span class="col-label">Column 1:</span>Research Track &amp; Subsystem<br>
+<span class="col-label">Column 2:</span>Qualified Tier-1 Suppliers<br>
+<span class="col-label">Column 3:</span>Current TRL (0-9)<br>
+<span class="col-label">Column 4:</span>Gap Size (0-10)<br>
+<span class="col-label">Column 5:</span>Mature Adjacency Count<br>
+<span class="col-label">Column 6:</span>Mature Adjacency TRL<br>
+<span class="col-label">Column 7:</span>Confidence (Ultan)<br>
+<span class="col-label">Column 8:</span>Percent Classified Dependency<br>
+<span class="col-label">Column 9:</span>Per-Subsystem R&amp;D Spend, 2025 ($K)<br>
+<span class="col-label">Column 10:</span>Per-Subsystem R&amp;D Spend, 2026 ($K)<br>
+<span class="col-label">Column 11:</span>Sum, Columns 9 &amp; 10
+  </div>
+
+  <div class="caveat" style="margin-top: 24px;">
+    Figure III-4 -- GATING-TECHNOLOGY READINESS MATRIX, PHASE 2 DRAFT<br>
+    (PLACEHOLDER VALUES FOR AESTHETIC PREVIEW. PHASE 2 RESEARCH WILL POPULATE THIS MATRIX FROM ULTAN-VETTED SOURCES.)<br>
+    (NAMES SHOWN ARE RESEARCH TRACKS, NOT (NECESSARILY) ACQUISITION PROGRAMS.)<br>
+    (SOURCE: PLACEHOLDER -- TO BE FILLED FROM PHASE 2 RESEARCH.)
+  </div>
+
+  <!-- Traffic-style growth chart, ARPANET Figure 4 revival -->
+  <h1 class="arpanet-h1" style="margin-top: 40px;">3.3 Aggregate TRL Growth, Tracked Subsystems</h1>
+
+  <div class="map-title" style="margin-top: 18px;">
+    AGGREGATE SUBSYSTEM TRL &mdash; TRACKED MATURATION
+  </div>
+
+  <svg class="line-chart" viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .chart-axis { stroke: #1A1A1A; stroke-width: 0.5; fill: none; }
+      .chart-tick { stroke: #1A1A1A; stroke-width: 0.5; }
+      .chart-line { stroke: #1A1A1A; stroke-width: 1.5; fill: none; }
+      .chart-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+    </style>
+    <!-- plot area 80,20 to 660,220 -->
+    <rect class="chart-axis" x="80" y="20" width="580" height="200"/>
+    <!-- Y-axis labels (log scale 10^0 to 10^3, meaning 1, 10, 100, 1000 "TRL-points") -->
+    <text class="chart-label" x="75" y="25" text-anchor="end">10³</text>
+    <text class="chart-label" x="75" y="75" text-anchor="end">10²</text>
+    <text class="chart-label" x="75" y="150" text-anchor="end">10¹</text>
+    <text class="chart-label" x="75" y="225" text-anchor="end">10⁰</text>
+    <!-- Y ticks -->
+    <line class="chart-tick" x1="76" y1="20" x2="80" y2="20"/>
+    <line class="chart-tick" x1="76" y1="70" x2="80" y2="70"/>
+    <line class="chart-tick" x1="76" y1="145" x2="80" y2="145"/>
+    <line class="chart-tick" x1="76" y1="220" x2="80" y2="220"/>
+    <!-- minor ticks -->
+    <g stroke="#1A1A1A" stroke-width="0.4">
+      <line x1="78" y1="35" x2="80" y2="35"/>
+      <line x1="78" y1="48" x2="80" y2="48"/>
+      <line x1="78" y1="58" x2="80" y2="58"/>
+      <line x1="78" y1="85" x2="80" y2="85"/>
+      <line x1="78" y1="100" x2="80" y2="100"/>
+      <line x1="78" y1="115" x2="80" y2="115"/>
+      <line x1="78" y1="130" x2="80" y2="130"/>
+      <line x1="78" y1="165" x2="80" y2="165"/>
+      <line x1="78" y1="180" x2="80" y2="180"/>
+      <line x1="78" y1="195" x2="80" y2="195"/>
+    </g>
+    <!-- X-axis ticks -->
+    <text class="chart-label" x="110" y="238" text-anchor="middle">2020</text>
+    <text class="chart-label" x="220" y="238" text-anchor="middle">2022</text>
+    <text class="chart-label" x="330" y="238" text-anchor="middle">2024</text>
+    <text class="chart-label" x="440" y="238" text-anchor="middle">2026</text>
+    <text class="chart-label" x="550" y="238" text-anchor="middle">2028</text>
+    <text class="chart-label" x="640" y="238" text-anchor="middle">2030</text>
+    <line class="chart-tick" x1="110" y1="220" x2="110" y2="224"/>
+    <line class="chart-tick" x1="220" y1="220" x2="220" y2="224"/>
+    <line class="chart-tick" x1="330" y1="220" x2="330" y2="224"/>
+    <line class="chart-tick" x1="440" y1="220" x2="440" y2="224"/>
+    <line class="chart-tick" x1="550" y1="220" x2="550" y2="224"/>
+    <line class="chart-tick" x1="640" y1="220" x2="640" y2="224"/>
+    <!-- axis labels -->
+    <text class="chart-label" x="30" y="125" text-anchor="middle" transform="rotate(-90, 30, 125)">TRL-POINTS</text>
+    <!-- data line (representative placeholder trajectory) -->
+    <polyline class="chart-line" points="110,200 145,195 180,185 220,175 260,160 300,150 340,135 380,125 420,110 460,95 500,85 540,78 580,72 620,68 640,65"/>
+    <!-- Projected future line (dashed) -->
+    <polyline class="chart-line" stroke-dasharray="4 3" points="640,65 655,60"/>
+  </svg>
+
+  <div class="caveat" style="margin-top:14px;">
+    Figure III-5 -- AGGREGATE TRACKED-SUBSYSTEM TRL, 2020-2030<br>
+    (PROJECTION PAST 2026-04 IS UNCERTAIN. PLACEHOLDER VALUES FOR AESTHETIC PREVIEW.)<br>
+    (SOURCE: PLACEHOLDER -- TO BE FILLED FROM PHASE 2 RESEARCH.)
+  </div>
+
+  <div class="arpanet-folio">III–12</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLATE 5 — Industrial-base geographic map (ARPANET geo) -->
+<!-- ============================================================ -->
+<div class="plate arpanet-page geo-plate">
+  <span class="plate-tag">Plate 5 · Industrial-Base Geographic Map <span class="register arpanet">ARPANET (geographic)</span></span>
+
+  <div class="arpanet-running-head">
+    <div class="left">GUNDAM LEVEL ZERO<br><span class="chapter">Chapter III</span></div>
+    <div class="right" style="text-align:right;">Gundam Level Zero<br><span class="chapter">Industrial Base</span></div>
+  </div>
+
+  <div class="map-title">
+    HEAVYARMS INDUSTRIAL BASE &mdash; TIER-1 AND TIER-2 FACILITIES, 2026<br>
+    <span class="rule"></span>
+  </div>
+
+  <svg class="geo-map" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="geo-map-title" aria-describedby="geo-map-desc">
+    <title id="geo-map-title">Heavyarms industrial base geographic map, tier-1 and tier-2 facilities, 2026</title>
+    <desc id="geo-map-desc">Simplified outline of the continental United States with filled-circle markers for tier-1 prime contractors, circled-T markers for tier-1 government facilities, and square markers for tier-2 qualified suppliers. Dense clusters around SoCal, the Bay Area, Detroit-Chicago, and the Northeast Corridor are enclosed in ellipses. A zigzag glyph at the western edge indicates classified or off-continent supply links. Placeholder content; production version uses John Quincy Adams with bespoke SVG overlay.</desc>
+    <style>
+      .coast { fill: none; stroke: #1A1A1A; stroke-width: 1; }
+      .great-lakes { fill: #FDFCF9; stroke: #1A1A1A; stroke-width: 0.7; }
+      .imp-dot { fill: #1A1A1A; }
+      .tip-circle { fill: none; stroke: #1A1A1A; stroke-width: 1; }
+      .tip-T { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: #1A1A1A; }
+      .tier2-square { fill: none; stroke: #1A1A1A; stroke-width: 1; }
+      .cluster-ring { fill: none; stroke: #1A1A1A; stroke-width: 0.6; }
+      .geo-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+      .geo-link { stroke: #1A1A1A; stroke-width: 1; fill: none; }
+    </style>
+
+    <!-- Simplified US outline -->
+    <path class="coast" d="M 50 240 L 75 180 L 95 140 L 130 115 L 175 105 L 225 100 L 285 95 L 345 92 L 410 90 L 470 92 L 535 97 L 600 105 L 665 115 L 720 130 L 755 155 L 780 180 L 800 210 L 810 245 L 820 280 L 825 315 L 820 350 L 800 380 L 770 405 L 720 420 L 660 428 L 595 430 L 530 425 L 475 415 L 420 400 L 375 395 L 325 405 L 280 415 L 235 415 L 190 405 L 150 380 L 115 350 L 90 320 L 70 285 L 55 260 Z"/>
+    <!-- Great Lakes (stylized) -->
+    <path class="great-lakes" d="M 520 170 Q 540 160 570 165 Q 590 170 585 185 Q 570 195 545 190 Q 525 185 520 175 Z"/>
+    <path class="great-lakes" d="M 590 195 Q 615 195 620 208 Q 615 220 590 218 Q 575 210 590 195 Z"/>
+
+    <!-- Cluster: Los Angeles / SoCal -->
+    <ellipse class="cluster-ring" cx="145" cy="320" rx="45" ry="32"/>
+    <circle class="imp-dot" cx="130" cy="315" r="4"/>
+    <text class="geo-label" x="90" y="300" text-anchor="end">SoCal-A</text>
+    <circle class="imp-dot" cx="155" cy="335" r="4"/>
+    <text class="geo-label" x="170" y="348" text-anchor="start">SoCal-B</text>
+    <rect class="tier2-square" x="115" y="310" width="8" height="8"/>
+
+    <!-- Cluster: Bay Area -->
+    <ellipse class="cluster-ring" cx="110" cy="235" rx="35" ry="25"/>
+    <circle class="imp-dot" cx="95" cy="232" r="4"/>
+    <text class="geo-label" x="55" y="228" text-anchor="end">Bay-A</text>
+    <circle class="imp-dot" cx="125" cy="240" r="4"/>
+    <text class="geo-label" x="145" y="248" text-anchor="start">Bay-B</text>
+
+    <!-- Pacific Northwest -->
+    <circle class="imp-dot" cx="145" cy="125" r="4"/>
+    <text class="geo-label" x="155" y="115" text-anchor="start">PNW-A</text>
+
+    <!-- Cluster: Dallas-Fort Worth -->
+    <circle class="imp-dot" cx="420" cy="380" r="4"/>
+    <text class="geo-label" x="410" y="398" text-anchor="middle">DFW</text>
+    <rect class="tier2-square" x="405" y="376" width="8" height="8"/>
+
+    <!-- Houston -->
+    <circle class="imp-dot" cx="455" cy="400" r="4"/>
+    <text class="geo-label" x="465" y="410" text-anchor="start">HOU</text>
+
+    <!-- Huntsville -->
+    <g>
+      <circle class="tip-circle" cx="555" cy="335" r="8"/>
+      <text class="tip-T" x="555" y="339" text-anchor="middle">T</text>
+      <text class="geo-label" x="545" y="360" text-anchor="end">HSV</text>
+    </g>
+
+    <!-- Great Lakes cluster: Detroit / Chicago -->
+    <ellipse class="cluster-ring" cx="510" cy="230" rx="45" ry="22"/>
+    <circle class="imp-dot" cx="490" cy="230" r="4"/>
+    <text class="geo-label" x="472" y="222" text-anchor="end">CHI</text>
+    <circle class="imp-dot" cx="530" cy="228" r="4"/>
+    <text class="geo-label" x="545" y="220" text-anchor="start">DET</text>
+    <rect class="tier2-square" x="496" y="236" width="8" height="8"/>
+
+    <!-- Cluster: Northeast Corridor -->
+    <ellipse class="cluster-ring" cx="720" cy="205" rx="50" ry="32"/>
+    <circle class="imp-dot" cx="700" cy="195" r="4"/>
+    <text class="geo-label" x="690" y="185" text-anchor="end">BOS</text>
+    <g>
+      <circle class="tip-circle" cx="735" cy="210" r="8"/>
+      <text class="tip-T" x="735" y="214" text-anchor="middle">T</text>
+      <text class="geo-label" x="755" y="214" text-anchor="start">NYC</text>
+    </g>
+    <circle class="imp-dot" cx="720" cy="225" r="4"/>
+    <text class="geo-label" x="720" y="245" text-anchor="middle">PHL</text>
+
+    <!-- Hampton Roads -->
+    <circle class="imp-dot" cx="690" cy="280" r="4"/>
+    <text class="geo-label" x="698" y="288" text-anchor="start">HRO</text>
+
+    <!-- DC -->
+    <g>
+      <circle class="tip-circle" cx="685" cy="255" r="8"/>
+      <text class="tip-T" x="685" y="259" text-anchor="middle">T</text>
+      <text class="geo-label" x="670" y="250" text-anchor="end">DC</text>
+    </g>
+
+    <!-- Inter-cluster links (leased-circuit analogue: tier-2 dependency lines) -->
+    <line class="geo-link" x1="155" y1="335" x2="420" y2="380"/>
+    <line class="geo-link" x1="130" y1="315" x2="490" y2="230"/>
+    <line class="geo-link" x1="125" y1="240" x2="530" y2="228"/>
+    <line class="geo-link" x1="530" y1="228" x2="700" y2="195"/>
+    <line class="geo-link" x1="555" y1="335" x2="685" y2="255"/>
+    <line class="geo-link" x1="420" y1="380" x2="555" y2="335"/>
+
+    <!-- Zigzag (off-continent / classified supply chain) -->
+    <path class="geo-link" d="M 10 340 L 25 340 L 30 335 L 40 345 L 50 335 L 60 345 L 70 335 L 80 345 L 85 340 L 95 340" />
+    <text class="geo-label" x="12" y="332">[CLASSIFIED]</text>
+
+    <!-- Legend box bottom-left -->
+    <g transform="translate(20, 440)">
+      <circle class="imp-dot" cx="8" cy="0" r="4"/>
+      <text class="geo-label" x="20" y="4">Tier-1 Prime Contractor</text>
+      <circle class="tip-circle" cx="8" cy="18" r="6"/>
+      <text class="tip-T" x="8" y="22" text-anchor="middle">T</text>
+      <text class="geo-label" x="20" y="22">Tier-1 Government Facility</text>
+      <rect class="tier2-square" x="4" y="34" width="8" height="8"/>
+      <text class="geo-label" x="20" y="41">Tier-2 Qualified Supplier</text>
+      <text class="geo-label" x="0" y="60">⌇⌇ CLASSIFIED OR OFF-CONTINENT</text>
+    </g>
+
+  </svg>
+
+  <div class="caveat" style="margin-top: 18px;">
+    Figure III-8 -- HEAVYARMS INDUSTRIAL BASE, TIER-1 AND TIER-2 FACILITIES, 2026<br>
+    (NOTE: THIS MAP DOES NOT SHOW TIER-3 SUBCONTRACTORS, LOGISTICS HUBS, OR ALLIED-NATION SUPPLIERS.)<br>
+    (PLEASE NOTE THAT WHILE THIS MAP SHOWS THE SUPPLIER POPULATION ACCORDING TO THE BEST INFORMATION OBTAINABLE, NO CLAIM CAN BE MADE FOR ITS ACCURACY. PLACEHOLDER LOCATIONS FOR AESTHETIC PREVIEW.)<br>
+    (NAMES SHOWN ARE CLUSTER NAMES, NOT (NECESSARILY) INDIVIDUAL PROGRAM NAMES.)<br>
+    (SOURCE: PLACEHOLDER -- TO BE FILLED FROM PHASE 2 RESEARCH. PRODUCTION VERSION WILL USE JOHN QUINCY ADAMS + BESPOKE SVG OVERLAY.)
+  </div>
+
+  <div class="nota-bene" style="font-family: var(--mono); font-style: normal; font-size: 10px;">
+    Honesty check: tier-1 and tier-2 are depicted by shape (dot / square) per MechaPDS. Tier-3 is excluded rather than silently merged into tier-2. Hierarchy is visible; it is not smuggled.
+  </div>
+
+  <div class="arpanet-folio">III–19</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLATE 6 — Bar charts (ARPANET + PDS-assisted) -->
+<!-- ============================================================ -->
+<div class="plate arpanet-page">
+  <span class="plate-tag">Plate 6 · Bar Graphs — Horizontal &amp; Vertical <span class="register arpanet">ARPANET</span></span>
+
+  <div class="arpanet-running-head">
+    <div class="left">GUNDAM LEVEL ZERO<br><span class="chapter">Chapter III</span></div>
+    <div class="right" style="text-align:right;">Gundam Level Zero<br><span class="chapter">Quantitative Assessment</span></div>
+  </div>
+
+  <h1 class="arpanet-h1">3.4 Readiness by Subsystem (Horizontal)</h1>
+
+  <p class="arpanet-body">The Figure 16 matrix in Section 3.2 presents all columns for the seven tracked research tracks; the following bar graph reduces that view to the single dimension of interest for the Gundam Level Zero threshold — current TRL. Categorical data benefits from horizontal orientation per the convention.</p>
+
+  <div class="map-title" style="margin-top: 14px;">
+    SUBSYSTEM TRL &mdash; CURRENT READINESS, 2026
+  </div>
+
+  <svg class="line-chart" viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .bar-axis { stroke: #1A1A1A; stroke-width: 0.5; fill: none; }
+      .bar-tick { stroke: #1A1A1A; stroke-width: 0.5; }
+      .bar-fill { fill: #1A1A1A; stroke: #1A1A1A; stroke-width: 0.5; }
+      .bar-hollow { fill: none; stroke: #1A1A1A; stroke-width: 0.75; stroke-dasharray: 2 2; }
+      .bar-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: #1A1A1A; }
+      .bar-value { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+      .bar-axis-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+    </style>
+
+    <!-- Plot area: x = 160 to 640, y = 30 to 280 -->
+    <rect class="bar-axis" x="160" y="30" width="480" height="250"/>
+
+    <!-- X-axis tick marks and labels (0 to 9 TRL) -->
+    <line class="bar-tick" x1="160" y1="280" x2="160" y2="286"/>
+    <text class="bar-axis-label" x="160" y="300" text-anchor="middle">0</text>
+    <line class="bar-tick" x1="213" y1="280" x2="213" y2="284"/>
+    <text class="bar-axis-label" x="213" y="300" text-anchor="middle">1</text>
+    <line class="bar-tick" x1="267" y1="280" x2="267" y2="284"/>
+    <text class="bar-axis-label" x="267" y="300" text-anchor="middle">2</text>
+    <line class="bar-tick" x1="320" y1="280" x2="320" y2="286"/>
+    <text class="bar-axis-label" x="320" y="300" text-anchor="middle">3</text>
+    <line class="bar-tick" x1="373" y1="280" x2="373" y2="284"/>
+    <text class="bar-axis-label" x="373" y="300" text-anchor="middle">4</text>
+    <line class="bar-tick" x1="427" y1="280" x2="427" y2="284"/>
+    <text class="bar-axis-label" x="427" y="300" text-anchor="middle">5</text>
+    <line class="bar-tick" x1="480" y1="280" x2="480" y2="286"/>
+    <text class="bar-axis-label" x="480" y="300" text-anchor="middle">6</text>
+    <line class="bar-tick" x1="533" y1="280" x2="533" y2="284"/>
+    <text class="bar-axis-label" x="533" y="300" text-anchor="middle">7</text>
+    <line class="bar-tick" x1="587" y1="280" x2="587" y2="284"/>
+    <text class="bar-axis-label" x="587" y="300" text-anchor="middle">8</text>
+    <line class="bar-tick" x1="640" y1="280" x2="640" y2="286"/>
+    <text class="bar-axis-label" x="640" y="300" text-anchor="middle">9</text>
+
+    <!-- X-axis label -->
+    <text class="bar-axis-label" x="400" y="322" text-anchor="middle">TECHNOLOGY READINESS LEVEL (TRL)</text>
+
+    <!-- GLZ threshold line (TRL 4 = minimum acceptable) -->
+    <line x1="373" y1="30" x2="373" y2="280" stroke="#1A1A1A" stroke-width="0.5" stroke-dasharray="3 3"/>
+    <text class="bar-axis-label" x="378" y="43" text-anchor="start" font-size="9">GLZ THRESHOLD ▶</text>
+
+    <!-- Bars: each bar is 22 tall, 8 gap, starting at y=42 -->
+    <!-- TRL values: PROP=4.0 STRU=4.5 MOBI=3.0 SENS=5.5 ARMT=6.2 INDB=2.0 DOCT=0.0 -->
+    <!-- Bar starts at x=160, each TRL unit = 53.33 px -->
+
+    <!-- T1 PROPULSION — TRL 4.0 -->
+    <text class="bar-label" x="150" y="67" text-anchor="end">T1 PROPULSION</text>
+    <rect class="bar-fill" x="160" y="54" width="213" height="22"/>
+    <text class="bar-value" x="383" y="70" text-anchor="start">4.0</text>
+
+    <!-- T2 STRUCTURE — TRL 4.5 -->
+    <text class="bar-label" x="150" y="97" text-anchor="end">T2 STRUCTURE</text>
+    <rect class="bar-fill" x="160" y="84" width="240" height="22"/>
+    <text class="bar-value" x="410" y="100" text-anchor="start">4.5</text>
+
+    <!-- T3 MOBILITY — TRL 3.0 -->
+    <text class="bar-label" x="150" y="127" text-anchor="end">T3 MOBILITY</text>
+    <rect class="bar-fill" x="160" y="114" width="160" height="22"/>
+    <text class="bar-value" x="330" y="130" text-anchor="start">3.0</text>
+
+    <!-- T4 SENSORS — TRL 5.5 -->
+    <text class="bar-label" x="150" y="157" text-anchor="end">T4 SENSORS</text>
+    <rect class="bar-fill" x="160" y="144" width="293" height="22"/>
+    <text class="bar-value" x="463" y="160" text-anchor="start">5.5</text>
+
+    <!-- T5 ARMAMENT — TRL 6.2 -->
+    <text class="bar-label" x="150" y="187" text-anchor="end">T5 ARMAMENT</text>
+    <rect class="bar-fill" x="160" y="174" width="331" height="22"/>
+    <text class="bar-value" x="501" y="190" text-anchor="start">6.2</text>
+
+    <!-- T6 INDUSTRIAL BASE — TRL 2.0 -->
+    <text class="bar-label" x="150" y="217" text-anchor="end">T6 IND. BASE</text>
+    <rect class="bar-fill" x="160" y="204" width="107" height="22"/>
+    <text class="bar-value" x="277" y="220" text-anchor="start">2.0</text>
+
+    <!-- T7 DOCTRINE — TRL 0.0 (shown as hollow dashed to indicate no data) -->
+    <text class="bar-label" x="150" y="247" text-anchor="end">T7 DOCTRINE</text>
+    <rect class="bar-hollow" x="160" y="234" width="6" height="22"/>
+    <text class="bar-value" x="172" y="250" text-anchor="start">(GAP)</text>
+
+  </svg>
+
+  <div class="caveat" style="margin-top: 12px;">
+    Figure III-6 -- SUBSYSTEM TRL, CURRENT READINESS<br>
+    (BARS ARE SOLID FILL. T7 DOCTRINE IS SHOWN AS A DASHED HOLLOW OUTLINE TO INDICATE A GAP, NOT A ZERO. UNCERTAINTY IS FLAGGED IN ARPANET IDIOM — PARENTHESIZED ALL CAPS — NOT IN PDS BRACKET FORM.)<br>
+    (PLACEHOLDER VALUES FOR AESTHETIC PREVIEW. PHASE 2 RESEARCH WILL POPULATE ACTUAL TRL.)<br>
+    (SOURCE: PLACEHOLDER -- TO BE FILLED FROM PHASE 2 RESEARCH.)
+  </div>
+
+  <h1 class="arpanet-h1" style="margin-top: 36px;">3.5 R&amp;D Expenditure Over Time (Vertical)</h1>
+
+  <p class="arpanet-body">Time-series data takes the vertical orientation per convention. Y-axis starts at zero; no truncation. Direct-labeled bar values at top of each bar.</p>
+
+  <div class="map-title" style="margin-top: 14px;">
+    AGGREGATE TRACKED-SUBSYSTEM R&amp;D SPEND, 2022&ndash;2026<br>
+    (U.S. DEPARTMENT OF WAR, DIRECT + ADJACENCY ATTRIBUTED)
+  </div>
+
+  <svg class="line-chart" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .v-axis { stroke: #1A1A1A; stroke-width: 0.5; fill: none; }
+      .v-tick { stroke: #1A1A1A; stroke-width: 0.5; }
+      .v-fill { fill: #1A1A1A; stroke: #1A1A1A; stroke-width: 0.5; }
+      .v-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: #1A1A1A; }
+      .v-value { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+      .v-axis-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: #1A1A1A; }
+    </style>
+
+    <!-- Plot area: x = 90 to 650, y = 30 to 240 -->
+    <rect class="v-axis" x="90" y="30" width="560" height="210"/>
+
+    <!-- Y-axis tick marks and labels (0 to 50 $M) -->
+    <!-- 5 gridlines at 0, 10, 20, 30, 40, 50 -->
+    <line class="v-tick" x1="84" y1="240" x2="90" y2="240"/>
+    <text class="v-axis-label" x="80" y="244" text-anchor="end">0</text>
+    <line class="v-tick" x1="86" y1="198" x2="90" y2="198"/>
+    <text class="v-axis-label" x="80" y="202" text-anchor="end">10</text>
+    <line class="v-tick" x1="86" y1="156" x2="90" y2="156"/>
+    <text class="v-axis-label" x="80" y="160" text-anchor="end">20</text>
+    <line class="v-tick" x1="86" y1="114" x2="90" y2="114"/>
+    <text class="v-axis-label" x="80" y="118" text-anchor="end">30</text>
+    <line class="v-tick" x1="86" y1="72" x2="90" y2="72"/>
+    <text class="v-axis-label" x="80" y="76" text-anchor="end">40</text>
+    <line class="v-tick" x1="84" y1="30" x2="90" y2="30"/>
+    <text class="v-axis-label" x="80" y="34" text-anchor="end">50</text>
+
+    <!-- Y-axis title -->
+    <text class="v-axis-label" x="30" y="140" text-anchor="middle" transform="rotate(-90, 30, 140)">$ MILLIONS (2026 USD)</text>
+
+    <!-- 5 bars — one per year 2022-2026. Each bar 80 wide, 30 gap. -->
+    <!-- Values: 12, 18, 25, 32, 44 -->
+    <!-- 12 → height 50.4, 18 → 75.6, 25 → 105, 32 → 134.4, 44 → 184.8 -->
+
+    <!-- 2022: 12 -->
+    <rect class="v-fill" x="130" y="189.6" width="80" height="50.4"/>
+    <text class="v-value" x="170" y="183" text-anchor="middle">12.0</text>
+    <text class="v-label" x="170" y="260" text-anchor="middle">2022</text>
+
+    <!-- 2023: 18 -->
+    <rect class="v-fill" x="240" y="164.4" width="80" height="75.6"/>
+    <text class="v-value" x="280" y="158" text-anchor="middle">18.0</text>
+    <text class="v-label" x="280" y="260" text-anchor="middle">2023</text>
+
+    <!-- 2024: 25 -->
+    <rect class="v-fill" x="350" y="135" width="80" height="105"/>
+    <text class="v-value" x="390" y="129" text-anchor="middle">25.0</text>
+    <text class="v-label" x="390" y="260" text-anchor="middle">2024</text>
+
+    <!-- 2025: 32 -->
+    <rect class="v-fill" x="460" y="105.6" width="80" height="134.4"/>
+    <text class="v-value" x="500" y="100" text-anchor="middle">32.0</text>
+    <text class="v-label" x="500" y="260" text-anchor="middle">2025</text>
+
+    <!-- 2026: 44 -->
+    <rect class="v-fill" x="570" y="55.2" width="80" height="184.8"/>
+    <text class="v-value" x="610" y="49" text-anchor="middle">44.0</text>
+    <text class="v-label" x="610" y="260" text-anchor="middle">2026</text>
+
+    <!-- X-axis title -->
+    <text class="v-axis-label" x="390" y="284" text-anchor="middle">FISCAL YEAR</text>
+
+  </svg>
+
+  <div class="caveat" style="margin-top: 12px;">
+    Figure III-7 -- AGGREGATE R&amp;D SPEND, TRACKED SUBSYSTEMS<br>
+    (Y-AXIS BEGINS AT ZERO. BAR WIDTH IS APPROXIMATELY 2.5&times; GAP WIDTH PER CONVENTION.)<br>
+    (PLACEHOLDER VALUES FOR AESTHETIC PREVIEW.)<br>
+    (SOURCE: PLACEHOLDER -- TO BE FILLED FROM PHASE 2 RESEARCH.)
+  </div>
+
+  <div class="arpanet-folio">III–21</div>
+</div>
+
+<div class="preview-header" style="background: var(--newsprint); color: var(--ink); border: 0.5px solid var(--ink);">
+  <h1 style="color: var(--ink);">Notes on what to look at</h1>
+  <p style="color: #555; font-family: var(--mono); font-size: 10px; line-height: 1.6;">
+    Plate 1 — Cover in pure PDS register. Em-dash rule and ARPANET sub-block at bottom are the two period citations.<br>
+    Plate 2 — The seam. PDS narrative typography (Source Serif 4 body, first-line indent, justified, italic lead) with an embedded ARPANET-register data table boxed in its own frame. Note the two uncertainty idioms: bold red [GAP] / [DATED] flags on PDS body text, parenthesized ALL CAPS caveat inside the ARPANET figure.<br>
+    Plate 3 — ARPANET logical map at the April 1971 – March 1972 density point. Boxed IMP subsystems, italic site labels, host ellipses, one zigzag link demonstrating the high-latency / pilot-signal convention.<br>
+    Plate 4 — ARPANET monospace matrix (Figure 16 revival) + traffic-style line chart (Figure 4 revival). Note the column legend below the table and the double-hyphen em-dash on the figure caption.<br>
+    Plate 5 — ARPANET geographic map. <strong>US outline is a hand-drawn SVG placeholder.</strong> Phase 3 will use Henry Gannett / JQA with real Census-based TopoJSON (us-states-10m.json, us-counties-10m.json) — accurate state borders, coastlines, county subdivisions.<br>
+    Plate 6 — Bar graphs. Horizontal for categorical (TRL by subsystem, with explicit GLZ threshold line and [GAP] hollow-dashed bar for missing data). Vertical for time series (R&amp;D spend 2022–2026, zero baseline, direct-labeled values). Both austere — solid ink black fill, 0.5pt outline, no spot color, no gridlines inside the plot frame, no legend (direct labeling).
+  </p>
+</div>
+
+</body>
+</html>
