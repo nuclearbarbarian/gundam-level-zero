@@ -1,0 +1,313 @@
+/* MechaPDS v0.2 — MVP stylesheet
+   Hackathon MVP for Gundam Level Zero. Strict register split.
+   PDS = Charter on Newsprint. ARPANET = Plex Mono on Paper White.
+   No hybrids. No color-only signals. */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* MechaPDS color tokens */
+  --ink-black: #1A1A1A;
+  --newsprint: #F5F2E8;       /* PDS substrate */
+  --paper-white: #FDFCF9;     /* ARPANET substrate */
+  --warm-gray: #9C9788;
+  --gray-30: #B8B5AC;
+  --industrial-red: #8B2B2B;
+  --utility-blue: #2B4B6F;
+  --safety-yellow: #C4A035;
+  --technical-green: #3D5C3D;
+
+  /* Typefaces */
+  --pds-serif: 'Charter', 'Iowan Old Style', 'Source Serif 4', Georgia, serif;
+  --mono: 'IBM Plex Mono', Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--newsprint);
+  color: var(--ink-black);
+  font-family: var(--pds-serif);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============== TOP BANNER (CHROME) ============== */
+.banner {
+  background: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--ink-black);
+}
+
+/* ============== PAGE WRAPPER ============== */
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 48px 96px;
+}
+
+/* ============== MASTHEAD (PDS report cover treatment) ============== */
+.masthead {
+  border-top: 3px solid var(--ink-black);
+  border-bottom: 1px solid var(--ink-black);
+  padding: 32px 0 24px;
+  margin-bottom: 48px;
+}
+.masthead .doc-no {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-black);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.masthead h1 {
+  font-family: var(--pds-serif);
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: -0.005em;
+}
+.masthead .subtitle {
+  font-family: var(--pds-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-black);
+  margin: 0;
+}
+.masthead .arpanet-stamp {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 18px;
+  color: var(--ink-black);
+}
+
+/* ============== PDS NARRATIVE ============== */
+.pds {
+  font-family: var(--pds-serif);
+  color: var(--ink-black);
+}
+.pds h2 {
+  font-family: var(--pds-serif);
+  font-weight: 700;
+  font-size: 24px;
+  margin: 56px 0 16px;
+  border-bottom: 1px solid var(--ink-black);
+  padding-bottom: 6px;
+}
+.pds h3 {
+  font-family: var(--pds-serif);
+  font-weight: 700;
+  font-size: 19px;
+  margin: 32px 0 8px;
+}
+.pds p {
+  margin: 0 0 16px;
+  text-align: left;
+}
+.pds .lede {
+  font-size: 19px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.pds .lede::first-line {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+.pds .pull-quote {
+  font-family: var(--pds-serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.35;
+  border-left: 3px solid var(--ink-black);
+  padding: 4px 0 4px 20px;
+  margin: 24px 0;
+  color: var(--ink-black);
+}
+.pds .gap-token {
+  font-family: var(--pds-serif);
+  font-weight: 700;
+  background: transparent;
+}
+.pds .source-line {
+  font-family: var(--pds-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--warm-gray);
+  margin-top: 8px;
+}
+
+/* ============== ARPANET FRAMED FIGURE (THE SEAM) ==============
+   v0.2 §Integration Points — PDS-primary with embedded ARPANET figure.
+   Frame: 0.5pt Ink Black border, Paper White interior, 14pt padding min. */
+.arpanet-figure {
+  border: 1px solid var(--ink-black);
+  background: var(--paper-white);
+  padding: 28px 28px 22px;
+  margin: 32px 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-black);
+  line-height: 1.5;
+}
+.arpanet-figure .fig-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+.arpanet-figure .fig-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 18px;
+}
+.arpanet-figure .fig-body { margin: 0; }
+.arpanet-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper-white);
+}
+.arpanet-figure .caveat {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-top: 16px;
+  letter-spacing: 0.04em;
+}
+.arpanet-figure .source {
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.arpanet-figure .legend {
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  border-top: 1px solid var(--ink-black);
+  padding-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.arpanet-figure .legend .swatch {
+  display: inline-block;
+  width: 18px;
+  height: 11px;
+  border: 1px solid var(--ink-black);
+  margin-right: 6px;
+  vertical-align: middle;
+  background: var(--paper-white);
+}
+.arpanet-figure .legend .glyph {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  margin-right: 6px;
+}
+
+/* PDS caption below ARPANET frame (the seam's outside) */
+.fig-caption {
+  font-family: var(--pds-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-black);
+  margin: -16px 0 32px;
+  padding-left: 4px;
+}
+
+/* ============== EMBEDDED MAP IFRAME ============== */
+.map-frame {
+  width: 100%;
+  height: 640px;
+  border: none;
+  background: var(--paper-white);
+}
+
+/* ============== READINESS MATRIX (PDS table-as-argument) ============== */
+table.readiness {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-family: var(--pds-serif);
+  font-size: 14px;
+}
+table.readiness caption {
+  font-family: var(--pds-serif);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+  padding: 8px 0;
+  font-size: 13px;
+}
+table.readiness th, table.readiness td {
+  border-bottom: 1px solid var(--ink-black);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+table.readiness th {
+  border-bottom: 2px solid var(--ink-black);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+table.readiness td.count {
+  font-family: var(--mono);
+  text-align: right;
+  font-size: 13px;
+}
+
+/* ============== FOOTER ============== */
+footer.colophon {
+  margin-top: 72px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--ink-black);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-black);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 768px) {
+  .page { padding: 32px 20px 64px; }
+  .masthead h1 { font-size: 32px; }
+  .arpanet-figure { padding: 18px 14px; overflow-x: auto; }
+  .map-frame { height: 480px; }
+}
+
+/* ============== PRINT ============== */
+@media print {
+  body { background: white; color: black; }
+  .banner { background: white; color: black; border-bottom: 1px solid black; }
+  .arpanet-figure { background: white; break-inside: avoid; }
+  .map-frame { display: none; }
+}

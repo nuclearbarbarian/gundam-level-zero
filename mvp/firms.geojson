@@ -1,0 +1,293 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.4167,
+          34.7333
+        ]
+      },
+      "properties": {
+        "label": "Osaka Titanium Technologies",
+        "country": "Japan",
+        "subsystem": "Aerospace Ti sponge",
+        "card": "GLZ-T6-STEP4-JP-METI-DID17",
+        "tier": "PRIMARY",
+        "note": "Amagasaki \u2014 duopoly with Toho Ti"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4081,
+          35.3296
+        ]
+      },
+      "properties": {
+        "label": "Toho Titanium",
+        "country": "Japan",
+        "subsystem": "Aerospace Ti sponge",
+        "card": "GLZ-T6-STEP4-JP-METI-DID17",
+        "tier": "PRIMARY",
+        "note": "Chigasaki, Kanagawa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.1955,
+          34.6901
+        ]
+      },
+      "properties": {
+        "label": "Kobe Steel (Kobelco)",
+        "country": "Japan",
+        "subsystem": "Specialty steels + Ti mill",
+        "card": "GLZ-T6-STEP4-JP-METI-DID17",
+        "tier": "PRIMARY",
+        "note": "Kobe HQ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6503,
+          35.6762
+        ]
+      },
+      "properties": {
+        "label": "Proterial (fmr Hitachi Metals)",
+        "country": "Japan",
+        "subsystem": "High-grade alloys + Ni superalloys",
+        "card": "GLZ-T6-STEP4-JP-METI-DID17",
+        "tier": "PRIMARY",
+        "note": "Tokyo HQ \u2014 divested by Hitachi 2023"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          136.9066,
+          35.1815
+        ]
+      },
+      "properties": {
+        "label": "Daido Steel",
+        "country": "Japan",
+        "subsystem": "Specialty steel + forgings",
+        "card": "GLZ-T6-STEP4-JP-METI-DID17",
+        "tier": "PRIMARY",
+        "note": "Nagoya"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.7945,
+          35.6557
+        ]
+      },
+      "properties": {
+        "label": "IHI Corporation",
+        "country": "Japan",
+        "subsystem": "Aero-engines + heavy fab",
+        "card": "GLZ-T6-STEP4-JP-MOD-DBP",
+        "tier": "PRIMARY",
+        "note": "Toyosu, Tokyo"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.76,
+          35.6762
+        ]
+      },
+      "properties": {
+        "label": "Mitsubishi Heavy Industries (MHI)",
+        "country": "Japan",
+        "subsystem": "Heavy fab + GCAP prime",
+        "card": "GLZ-T6-STEP4-JP-MOD-DBP",
+        "tier": "PRIMARY",
+        "note": "Tokyo HQ \u2014 GCAP+F-X anchor"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.6817,
+          35.2278
+        ]
+      },
+      "properties": {
+        "label": "Hanwha Aerospace",
+        "country": "South Korea",
+        "subsystem": "K9 howitzer + propulsion",
+        "card": "GLZ-T6-STEP4-KR-CSIS-DAPA-2024",
+        "tier": "PRIMARY",
+        "note": "Changwon \u2014 K9 production"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.7,
+          34.8775
+        ]
+      },
+      "properties": {
+        "label": "Hanwha Ocean",
+        "country": "South Korea",
+        "subsystem": "Submarines + naval fab",
+        "card": "GLZ-T6-STEP4-KR-2024-2plus2",
+        "tier": "PRIMARY",
+        "note": "Geoje/Okpo \u2014 fmr DSME"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          129.3114,
+          35.5384
+        ]
+      },
+      "properties": {
+        "label": "HD Hyundai Heavy Industries",
+        "country": "South Korea",
+        "subsystem": "Naval shipbuilding + MRO",
+        "card": "GLZ-T6-STEP4-KR-2024-2plus2",
+        "tier": "PRIMARY",
+        "note": "Ulsan \u2014 USN MRO certifying yard"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.989,
+          37.429
+        ]
+      },
+      "properties": {
+        "label": "DAPA HQ",
+        "country": "South Korea",
+        "subsystem": "Acquisition authority",
+        "card": "GLZ-T6-STEP4-KR-MND-WP-2022",
+        "tier": "GOVT",
+        "note": "Gwacheon \u2014 Defense Acquisition Program Administration"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.143,
+          39.902
+        ]
+      },
+      "properties": {
+        "label": "Hanwha Philly Shipyard",
+        "country": "South Korea (FDI in US)",
+        "subsystem": "Shipbuilding capacity (US soil)",
+        "card": "GLZ-T6-STEP4-KR-HANWHA-PHILLY",
+        "tier": "PRIMARY",
+        "note": "Philadelphia \u2014 Korean capital into US DIB; $150B MASGA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1075,
+          38.8841
+        ]
+      },
+      "properties": {
+        "label": "DARPA",
+        "country": "United States",
+        "subsystem": "Innovation funding",
+        "card": "PROJECT REFERENCE",
+        "tier": "GOVT",
+        "note": "Arlington, VA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0563,
+          38.8719
+        ]
+      },
+      "properties": {
+        "label": "Department of War HQ",
+        "country": "United States",
+        "subsystem": "Acquisition authority",
+        "card": "PROJECT REFERENCE",
+        "tier": "GOVT",
+        "note": "The Pentagon \u2014 fmr DoD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8978,
+          48.3705
+        ]
+      },
+      "properties": {
+        "label": "KUKA AG",
+        "country": "Germany",
+        "subsystem": "Industrial robotics \u2014 PRC-CAPTURED",
+        "card": "GLZ-T6-AV-USCC-2025-CH6",
+        "tier": "EXCLUDED-CAPTURED",
+        "note": "Augsburg \u2014 Midea (PRC) acquired 2017; complicates DE roster"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0596,
+          22.5429
+        ]
+      },
+      "properties": {
+        "label": "DJI",
+        "country": "China",
+        "subsystem": "70% global drone market",
+        "card": "GLZ-T6-STEP4-JP-ANCHOR",
+        "tier": "EXCLUDED",
+        "note": "Shenzhen \u2014 exclusion floor for baseline UAS pooling"
+      }
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  HEAVYARMS TECH TREE v0.1 — Hackathon MVP
+  Register: ARPANET (per MechaPDS v0.2 §Logical maps)
+  Genre: BBN ARPANET logical map (Heart, McKenzie, McQuillan & Walden, 1978/1981)
+
+  v0.1 adds: GUNDAM LEVEL ZERO threshold band + precursor baseline row.
+
+  [HONESTY-CHECK] (per MechaPDS Rule 2)
+    1. Depicted dimension: distance to GUNDAM LEVEL ZERO threshold, expressed as three
+       vertical bands — PRECURSOR (extant today), GATING (Phase 2 research), THRESHOLD
+       (above which Heavyarms-class production becomes possible per CLAUDE.md).
+    2. Depicted entities: 21 gating nodes (T1-T7) + 7 precursor entries.
+    3. Pairwise equivalence: nodes equivalent within their band; band membership encodes
+       hierarchy via vertical placement and glyph (boxes vs triangles), not flat form.
+    4. Other ranking dimensions (criticality, cost, technical risk) NOT load-bearing for
+       this figure's argument; track placement is alphabetical by track ID.
+    5. PRECURSOR ROW ENTRIES are indicative-not-sourced; flagged with [△] glyph and explicit
+       caveat. T1-T5 Phase 2 hunt will validate or revise. Honesty Rule 4 satisfied.
+
+  Color-pair compliance (Rule 4): readiness state encoded by bracket+glyph (semantic) AND
+  fill (visual). Glyph alone is sufficient; figure remains legible in grayscale and to
+  color-blind readers. No information depends on color.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1200 700"
+     font-family="'IBM Plex Mono', Consolas, monospace"
+     fill="#1A1A1A">
+
+  <style>
+    text { stroke: none; }
+    .label { font-size: 11px; letter-spacing: 0.04em; }
+    .node-label { font-size: 10.5px; }
+    .track-header { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; }
+    .track-sub { font-size: 9px; letter-spacing: 0.06em; }
+    .band-label { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; }
+    .band-label-large { font-size: 14px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+    .node-box { fill: #FDFCF9; stroke: #1A1A1A; stroke-width: 1; }
+    .node-box-researched { fill: #1A1A1A; stroke: #1A1A1A; stroke-width: 1; }
+    .node-box-scoped { fill: #FDFCF9; stroke: #1A1A1A; stroke-width: 1; stroke-dasharray: 3 2; }
+    .node-box-precursor { fill: #FDFCF9; stroke: #1A1A1A; stroke-width: 0.75; }
+    .node-text-light { fill: #FDFCF9; }
+    .glyph { font-size: 13px; }
+    .edge { fill: none; stroke: #1A1A1A; stroke-width: 0.75; }
+    .edge-cross { fill: none; stroke: #1A1A1A; stroke-width: 0.75; stroke-dasharray: 4 3; }
+    .axis { stroke: #1A1A1A; stroke-width: 0.5; }
+    .frame { fill: none; stroke: #1A1A1A; stroke-width: 1; }
+    .threshold-line { stroke: #1A1A1A; stroke-width: 2; }
+    .threshold-line-thin { stroke: #1A1A1A; stroke-width: 0.75; }
+    .baseline-line { stroke: #1A1A1A; stroke-width: 0.5; stroke-dasharray: 2 2; }
+  </style>
+
+  <!-- Paper-White background -->
+  <rect fill="#FDFCF9" x="0" y="0" width="1200" height="700"/>
+
+  <!-- Outer frame -->
+  <rect class="frame" x="8" y="8" width="1184" height="684"/>
+
+  <!-- ============== GUNDAM LEVEL ZERO THRESHOLD BAND (TOP) ============== -->
+  <g transform="translate(0,28)">
+    <text class="band-label" x="20"   y="0">{ ABOVE THRESHOLD }</text>
+    <text class="band-label" x="1180" y="0" text-anchor="end">HEAVYARMS-CLASS PRODUCTION POSSIBLE</text>
+
+    <!-- Double-rule threshold (heavy upper, hairline lower) -->
+    <line class="threshold-line"      x1="20" y1="14" x2="1180" y2="14"/>
+    <line class="threshold-line-thin" x1="20" y1="20" x2="1180" y2="20"/>
+
+    <text class="band-label-large" x="600" y="40" text-anchor="middle">— GUNDAM LEVEL ZERO —</text>
+    <text class="label" x="600" y="56" text-anchor="middle">(THE THRESHOLD AT WHICH HEAVYARMS CONSTRUCTION FOR COMBAT USE BECOMES POSSIBLE.)</text>
+  </g>
+
+  <!-- ============== TRACK HEADERS ============== -->
+  <!-- Column centers: 105, 263, 421, 579, 737, 895, 1075 -->
+  <g transform="translate(0,108)">
+    <text class="track-header" x="105"  y="0" text-anchor="middle">T1 PROP</text>
+    <text class="track-sub"    x="105"  y="14" text-anchor="middle">PROPULSION/POWER</text>
+
+    <text class="track-header" x="263"  y="0" text-anchor="middle">T2 STRU</text>
+    <text class="track-sub"    x="263"  y="14" text-anchor="middle">STRUCTURE/MATL</text>
+
+    <text class="track-header" x="421"  y="0" text-anchor="middle">T3 MOBL</text>
+    <text class="track-sub"    x="421"  y="14" text-anchor="middle">MOBILITY/BALANCE</text>
+
+    <text class="track-header" x="579"  y="0" text-anchor="middle">T4 SENS</text>
+    <text class="track-sub"    x="579"  y="14" text-anchor="middle">SENSING/AUTONOMY</text>
+
+    <text class="track-header" x="737"  y="0" text-anchor="middle">T5 ARMT</text>
+    <text class="track-sub"    x="737"  y="14" text-anchor="middle">ARMAMENT INTEG</text>
+
+    <text class="track-header" x="895"  y="0" text-anchor="middle">T6 IBAS</text>
+    <text class="track-sub"    x="895"  y="14" text-anchor="middle">INDUSTRIAL BASE</text>
+
+    <text class="track-header" x="1075" y="0" text-anchor="middle">T7 DOCT</text>
+    <text class="track-sub"    x="1075" y="14" text-anchor="middle">DOCTRINE/UTILITY</text>
+  </g>
+
+  <!-- Header underline -->
+  <line class="axis" x1="20" y1="138" x2="1180" y2="138"/>
+
+  <!-- ============== GATING BAND LABEL ============== -->
+  <text class="band-label" x="20"   y="158">{ GATING BAND — PHASE 2 RESEARCH NODES }</text>
+
+  <!-- ============== NODES (GATING BAND) ============== -->
+
+  <!-- T1 PROP — all NOT STARTED -->
+  <g transform="translate(30,170)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">HEAVY ACTUATORS</text>
+  </g>
+  <g transform="translate(30,214)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">ENERGY STORAGE</text>
+  </g>
+  <g transform="translate(30,258)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">THERMAL MGMT</text>
+  </g>
+
+  <!-- T2 STRU -->
+  <g transform="translate(188,170)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">FRAME METALLURGY</text>
+  </g>
+  <g transform="translate(188,214)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">COMPOSITE ARMOR</text>
+  </g>
+  <g transform="translate(188,258)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">SURVIVABILITY</text>
+  </g>
+
+  <!-- T3 MOBL -->
+  <g transform="translate(346,170)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">BIPEDAL LOCO.</text>
+  </g>
+  <g transform="translate(346,214)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">TERRAIN REASONING</text>
+  </g>
+
+  <!-- T4 SENS -->
+  <g transform="translate(504,170)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">PILOT-ASSIST</text>
+  </g>
+  <g transform="translate(504,214)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">SENSOR FUSION/EW</text>
+  </g>
+
+  <!-- T5 ARMT -->
+  <g transform="translate(662,170)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">PROJECTILE</text>
+  </g>
+  <g transform="translate(662,214)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">BEAM-ANALOGUE</text>
+  </g>
+  <g transform="translate(662,258)">
+    <rect class="node-box" x="0" y="0" width="150" height="32"/>
+    <text class="glyph" x="10" y="21">[ ]</text>
+    <text class="node-label" x="36" y="21">MELEE</text>
+  </g>
+
+  <!-- T6 IBAS -->
+  <g transform="translate(820,170)">
+    <rect class="node-box-researched" x="0" y="0" width="150" height="32"/>
+    <text class="glyph node-text-light" x="10" y="21">[●]</text>
+    <text class="node-label node-text-light" x="36" y="21">SPECIALTY ALLOYS</text>
+  </g>
+  <g transform="translate(820,214)">
+    <rect class="node-box-researched" x="0" y="0" width="150" height="32"/>
+    <text class="glyph node-text-light" x="10" y="21">[●]</text>
+    <text class="node-label node-text-light" x="36" y="21">MACHINE TOOLS</text>
+  </g>
+  <g transform="translate(820,258)">
+    <rect class="node-box-researched" x="0" y="0" width="150" height="32"/>
+    <text class="glyph node-text-light" x="10" y="21">[●]</text>
+    <text class="node-label node-text-light" x="36" y="21">HEAVY FAB</text>
+  </g>
+  <g transform="translate(820,302)">
+    <rect class="node-box-researched" x="0" y="0" width="150" height="32"/>
+    <text class="glyph node-text-light" x="10" y="21">[●]</text>
+    <text class="node-label node-text-light" x="36" y="21">PPBE REFORM</text>
+  </g>
+  <g transform="translate(820,346)">
+    <rect class="node-box-researched" x="0" y="0" width="150" height="32"/>
+    <text class="glyph node-text-light" x="10" y="21">[●]</text>
+    <text class="node-label node-text-light" x="36" y="21">ALLIED INTEG.</text>
+  </g>
+
+  <!-- T7 DOCT -->
+  <g transform="translate(1000,170)">
+    <rect class="node-box-researched" x="0" y="0" width="170" height="32"/>
+    <text class="glyph node-text-light" x="10" y="21">[●]</text>
+    <text class="node-label node-text-light" x="36" y="21">COST/KILL ECON.</text>
+  </g>
+  <g transform="translate(1000,214)">
+    <rect class="node-box-scoped" x="0" y="0" width="170" height="32"/>
+    <text class="glyph" x="10" y="21">[○]</text>
+    <text class="node-label" x="36" y="21">URBAN COMBAT</text>
+  </g>
+  <g transform="translate(1000,258)">
+    <rect class="node-box-scoped" x="0" y="0" width="170" height="32"/>
+    <text class="glyph" x="10" y="21">[○]</text>
+    <text class="node-label" x="36" y="21">LITTORAL CHAINS</text>
+  </g>
+
+  <!-- ============== DEPENDENCY EDGES ==============
+       Routed through corridor below the gating band (y=410).
+       Solid = direct dependency.
+       Dashed = substrate dependency (T6 IBAS feeds component tracks).
+  -->
+  <line class="edge-cross" x1="100" y1="410" x2="900" y2="410"/>
+  <path class="edge-cross" d="M 820,186 L 760,186 L 760,410"/>
+  <path class="edge-cross" d="M 820,230 L 780,230 L 780,410"/>
+  <path class="edge-cross" d="M 820,274 L 800,274 L 800,410"/>
+  <path class="edge-cross" d="M 820,362 L 900,362 L 900,410"/>
+  <path class="edge-cross" d="M 105,410 L 105,290"/>
+  <path class="edge-cross" d="M 263,410 L 263,290"/>
+  <path class="edge-cross" d="M 737,410 L 737,290"/>
+
+  <!-- Within-track edges -->
+  <path class="edge" d="M 654,230 L 670,230 L 670,186 L 1000,186"/>
+  <path class="edge" d="M 1000,186 L 985,186 L 985,156 L 737,156 L 737,170"/>
+
+  <!-- ============== PRECURSOR BASELINE (BOTTOM BAND) ============== -->
+  <line class="baseline-line" x1="20" y1="445" x2="1180" y2="445"/>
+  <text class="band-label" x="20"   y="465">{ PRECURSOR BASELINE — EXTANT TODAY (INDICATIVE) }</text>
+
+  <!-- Precursor row — open triangle [△] glyph signals indicative-not-carded -->
+  <g transform="translate(30,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="150" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">INDUSTRIAL ROBOT.</text>
+  </g>
+  <g transform="translate(188,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="150" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">AEROSPACE Ti</text>
+  </g>
+  <g transform="translate(346,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="150" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">QUADRUPED LOCO.</text>
+  </g>
+  <g transform="translate(504,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="150" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">F-35 FUSION</text>
+  </g>
+  <g transform="translate(662,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="150" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">GUIDED PRECISION</text>
+  </g>
+  <g transform="translate(820,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="150" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">F-35 MFG BASE</text>
+  </g>
+  <g transform="translate(1000,478)">
+    <rect class="node-box-precursor" x="0" y="0" width="170" height="30"/>
+    <text class="glyph" x="10" y="20">[△]</text>
+    <text class="node-label" x="36" y="20">CUAS DOCTRINE</text>
+  </g>
+
+  <!-- ============== EDGE / GLYPH LEGEND ============== -->
+  <g transform="translate(20,540)">
+    <text class="band-label" x="0" y="0">{ LEGEND }</text>
+
+    <!-- Glyphs -->
+    <text class="glyph" x="0"   y="22">[●]</text>
+    <text class="label" x="30"  y="22">RESEARCHED (SOURCE CARDS IN HAND)</text>
+    <text class="glyph" x="290" y="22">[○]</text>
+    <text class="label" x="320" y="22">SCOPED (DEFINED IN CLAUDE.MD; NO CARDS YET)</text>
+    <text class="glyph" x="640" y="22">[ ]</text>
+    <text class="label" x="670" y="22">NOT STARTED (GAP)</text>
+    <text class="glyph" x="860" y="22">[△]</text>
+    <text class="label" x="890" y="22">PRECURSOR / INDICATIVE-NOT-CARDED</text>
+
+    <!-- Edges -->
+    <line class="edge"       x1="0"   y1="44" x2="36"  y2="44"/>
+    <text class="label"      x="44"   y="48">DIRECT DEPENDENCY</text>
+    <line class="edge-cross" x1="290" y1="44" x2="326" y2="44"/>
+    <text class="label"      x="334"  y="48">SUBSTRATE DEPENDENCY (T6 IBAS FEEDS COMPONENT TRACKS)</text>
+  </g>
+
+  <!-- ============== BOTTOM CAVEAT BLOCK ============== -->
+  <g transform="translate(20,612)">
+    <text class="label" x="0" y="0">(13 OF 21 GATING NODES NOT YET STARTED. PHASE 2 RESEARCH IN PROGRESS PER CLAUDE.MD GATE.)</text>
+    <text class="label" x="0" y="16">(PRECURSOR ROW ENTRIES INDICATIVE — NOT SOURCED AT CARD-LEVEL. T1-T5 PHASE 2 HUNT WILL VALIDATE.)</text>
+    <text class="label" x="0" y="32">(GERMANY/TAIWAN/NETHERLANDS/SWITZERLAND ALLIED CARDS [GAP -- STEP 4 PENDING] PER ADR 0002.)</text>
+    <text class="label" x="0" y="56" font-weight="500">(SOURCE: BORGES SOURCE CARDS, GUNDAM LEVEL ZERO PROJECT, AS OF 2026-04-26.)</text>
+  </g>
+
+</svg>
